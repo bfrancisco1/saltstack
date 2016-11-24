@@ -11,4 +11,3 @@ supervisor:
     source: salt://hwaas-service/supervisor.conf
     - require:
       - pkg: supervisor
-    
