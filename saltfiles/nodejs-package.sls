@@ -9,4 +9,3 @@ nodejs:
     - force_yes: True
     - require:
       - pkgrepo: nodejs-repo
-
