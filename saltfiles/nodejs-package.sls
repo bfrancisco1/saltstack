@@ -5,5 +5,6 @@ nodejs-repo:
 #    - key_url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
 
 nodejs:
-  pkg:
-    - installed
+  pkg.installed:
+    - force_yes: True
+
