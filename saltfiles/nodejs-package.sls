@@ -7,4 +7,6 @@ nodejs-repo:
 nodejs:
   pkg.installed:
     - force_yes: True
+    - require:
+      - pkgrepo: nodejs-repo
 
