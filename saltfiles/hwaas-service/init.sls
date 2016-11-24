@@ -8,6 +8,6 @@ supervisor:
 
 /etc/supervisor/conf.d/hwaas-site.conf:
   file.managed:
-    source: salt://hwaas-service/supervisor.conf
+    - source: salt://hwaas-service/supervisor.conf
     - require:
       - pkg: supervisor
