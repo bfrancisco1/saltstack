@@ -87,6 +87,16 @@ Vagrant.configure(2) do |config|
       s.args = ["-A", "192.168.101.10"]
     end
   end
+  config.vm.define "saltclient1" do |saltclient1|
+    saltclient1.vm.box = "ubuntu/trusty64"
+    saltclient1.vm.hostname = "saltclient1.localhost"
+    saltclient1.vm.network "private_network", ip: "192.168.101.13"
+
+    saltclient1.vm.provision "shell" do |s|
+      s.path = "bootstrap-salt.sh"
+      s.args = ["-A", "192.168.101.10"]
+    end
+  end    
   config.vm.define "saltclientwindows" do |saltclientwindows|
     saltclientwindows.vm.box = "mwrock/Windows2012R2"
     saltclientwindows.vm.hostname = "saltclientwindows"
