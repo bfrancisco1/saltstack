@@ -5,3 +5,6 @@ base:
     - npm-package
     - hwaas-site
     - hwaas-service
+  'roles:load-balancing':
+    - match: grain
+    - load-balance
