@@ -1,5 +1,6 @@
 base:
-  'saltclient.localhost':
+  'roles:hwaas-web':
+    - match: grain
     - nodejs-package
     - npm-package
     - hwaas-site
