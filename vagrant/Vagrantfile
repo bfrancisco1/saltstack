@@ -19,6 +19,7 @@ Vagrant.configure(2) do |config|
     saltmaster.vm.hostname = "saltmaster.localhost"
     saltmaster.vm.network "private_network", ip: "192.168.101.10"
   config.vm.synced_folder "../saltfiles", "/srv/salt/prod"
+  config.vm.synced_folder "../pillar", "/srv/pillar"
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
@@ -76,35 +77,45 @@ Vagrant.configure(2) do |config|
 #  config.vm.provision "file", source: "fileserver.conf", destination: "/etc/salt/master.d"
 
   end
-  config.vm.define "saltclient" do |saltclient|
+  config.vm.define "web01" do |web01|
 
-    saltclient.vm.box = "ubuntu/trusty64"
-    saltclient.vm.hostname = "saltclient.localhost"
-    saltclient.vm.network "private_network", ip: "192.168.101.11"
+    web01.vm.box = "ubuntu/trusty64"
+    web01.vm.hostname = "web01.localhost"
+    web01.vm.network "private_network", ip: "192.168.101.11"
 
-    saltclient.vm.provision "shell" do |s|
+    web01.vm.provision "shell" do |s|
       s.path = "bootstrap-salt.sh"
       s.args = ["-A", "192.168.101.10"]
     end
   end
-  config.vm.define "saltclient1" do |saltclient1|
-    saltclient1.vm.box = "ubuntu/trusty64"
-    saltclient1.vm.hostname = "saltclient1.localhost"
-    saltclient1.vm.network "private_network", ip: "192.168.101.13"
+  config.vm.define "web02" do |web02|
+    web02.vm.box = "ubuntu/trusty64"
+    web02.vm.hostname = "web02.localhost"
+    web02.vm.network "private_network", ip: "192.168.101.13"
 
-    saltclient1.vm.provision "shell" do |s|
+    web02.vm.provision "shell" do |s|
       s.path = "bootstrap-salt.sh"
       s.args = ["-A", "192.168.101.10"]
     end
-  end    
+  end
+  config.vm.define "loadbalance01" do |loadbalance01|
+    loadbalance01.vm.box = "ubuntu/trusty64"
+    loadbalance01.vm.hostname = "loadbalance01.localhost"
+    loadbalance01.vm.network "private_network", ip: "192.168.101.14"
+
+    loadbalance01.vm.provision "shell" do |s|
+      s.path = "bootstrap-salt.sh"
+      s.args = ["-A", "192.168.101.10"]
+    end
+  end      
   config.vm.define "saltclientwindows" do |saltclientwindows|
     saltclientwindows.vm.box = "mwrock/Windows2012R2"
     saltclientwindows.vm.hostname = "saltclientwindows"
     saltclientwindows.vm.network "private_network", ip: "192.168.101.12"
 
-    saltclientwindows.vm.provision "shell" do |s|
+      saltclientwindows.vm.provision "shell" do |s|
       s.path = "bootstrap-salt.ps1"
       s.args = ["-version", "2016.3.3","-master","192.168.101.10"]
     end
-  end 
+  end  
 end
