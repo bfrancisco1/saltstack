@@ -1,4 +1,4 @@
 sample-username:
   sparky
-sample-password:
+sample password:
   eleventy one
