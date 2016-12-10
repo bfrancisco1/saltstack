@@ -20,10 +20,11 @@ Vagrant.configure(2) do |config|
     saltmaster.vm.network "private_network", ip: "192.168.101.10"
   config.vm.synced_folder "../saltfiles", "/srv/salt/prod"
   config.vm.synced_folder "../pillar", "/srv/pillar"
+  config.vm.synced_folder "../orch", "/srv/orch"
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
-  # config.vm.box_check_update = false
+   config.vm.box_check_update = false
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
@@ -72,7 +73,7 @@ Vagrant.configure(2) do |config|
   # documentation for more information about their specific syntax and user
     saltmaster.vm.provision "shell" do |s|
       s.path = "bootstrap-salt.sh"
-      s.args = ["-M", "-A", "127.0.0.1","stable", "2016.3.3", ]
+      s.args = ["-M", "-A", "127.0.0.1","stable", "2016.3.4", ]
     end
 #  config.vm.provision "file", source: "fileserver.conf", destination: "/etc/salt/master.d"
 
@@ -115,7 +116,7 @@ Vagrant.configure(2) do |config|
 
       saltclientwindows.vm.provision "shell" do |s|
       s.path = "bootstrap-salt.ps1"
-      s.args = ["-version", "2016.3.3","-master","192.168.101.10"]
+      s.args = ["-version", "2016.3.4","-master","192.168.101.10"]
     end
   end  
 end
