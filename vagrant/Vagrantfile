@@ -86,7 +86,7 @@ Vagrant.configure(2) do |config|
 
     web01.vm.provision "shell" do |s|
       s.path = "bootstrap-salt.sh"
-      s.args = ["-A", "192.168.101.10"]
+      s.args = ["-A", "192.168.101.10","stable", "2016.3.4"]
     end
   end
   config.vm.define "web02" do |web02|
@@ -96,7 +96,7 @@ Vagrant.configure(2) do |config|
 
     web02.vm.provision "shell" do |s|
       s.path = "bootstrap-salt.sh"
-      s.args = ["-A", "192.168.101.10"]
+      s.args = ["-A", "192.168.101.10","stable", "2016.3.4"]
     end
   end
   config.vm.define "loadbalance01" do |loadbalance01|
@@ -106,7 +106,7 @@ Vagrant.configure(2) do |config|
 
     loadbalance01.vm.provision "shell" do |s|
       s.path = "bootstrap-salt.sh"
-      s.args = ["-A", "192.168.101.10"]
+      s.args = ["-A", "192.168.101.10", "stable", "2016.3.4"]
     end
   end      
   config.vm.define "saltclientwindows" do |saltclientwindows|
