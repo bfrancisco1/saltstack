@@ -15,11 +15,11 @@ remove-grain-from-primary:
 
 remove_primary_from_load_balancing:
   salt.state:
-    -  sls: load-balance
-    -  tgt: roles:load-balancing
-    -  tgt_type: grain
-    -  require:
-      - salt: remove_grain_from_primary
+    - sls: load-balance
+    - tgt: roles:load-balancing
+    - tgt_type: grain
+    - require:
+      - salt: remove-grain-from-primary
 
 upgrade_primary:
   salt.state:
@@ -36,7 +36,7 @@ reset_grain_on_primary:
     - arg:
       - hwaas
       - online
-    -require:
+    - require:
       - salt: upgrade_primary
 
 remove-grain-from-secondary:
@@ -52,10 +52,10 @@ remove-grain-from-secondary:
 
 switch_load_balancer_from_primary_to_secondary:
   salt.state:
-    -  sls: load-balance
-    -  tgt: roles:load-balancing
-    -  tgt_type: grain
-    -  require:
+    - sls: load-balance
+    - tgt: roles:load-balancing
+    - tgt_type: grain
+    - require:
       - salt: remove-grain-from-secondary
 
 upgrade_secondary:
@@ -73,11 +73,11 @@ reset_grain_on_secondary:
     - arg:
       - hwaas
       - online
-    -require:
+    - require:
       - salt: upgrade_secondary
 
 final_load_balancer_update:
-  salt.state
+  salt.state:
     - sls: load-balance
     - tgt: roles:load-balance
     - tgt_type: grain
